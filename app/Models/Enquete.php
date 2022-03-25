@@ -9,9 +9,11 @@ class Enquete extends Model
 {
     use HasFactory;
 
-    protected $table = 'enquete';
-    protected $fillable = [
-        'pergunta', 'resposta'
-    ];
+    protected $table = 'enquetes';
+    protected $fillable = [ 'titulo', 'data_inicio', 'data_fim' ];
 
+    public function opcoes()
+    {
+        return $this->hasMany(EnqueteOpcoes::class, 'enquete_id');
+    }
 }

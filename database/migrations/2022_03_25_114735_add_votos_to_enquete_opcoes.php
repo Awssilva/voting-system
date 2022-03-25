@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CriarTabelaEnquete extends Migration
+class AddVotosToEnqueteOpcoes extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CriarTabelaEnquete extends Migration
      */
     public function up()
     {
-        Schema::create('enquetes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('titulo');
-            $table->date('data_inicio');
-            $table->date('data_fim');
-            $table->timestamps();
+        Schema::table('enquete_opcoes', function (Blueprint $table) {
+            $table->integer('votos')->default(0);
         });
     }
 
@@ -29,6 +25,8 @@ class CriarTabelaEnquete extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('enquete');
+        Schema::table('enquete_opcoes', function (Blueprint $table) {
+            //
+        });
     }
 }

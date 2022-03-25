@@ -5,11 +5,11 @@ use App\Http\Controllers\EnqueteController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/enquete');
 });
 
 
-
-Route::resource('enquetes', EnqueteController::class);
+Route::get('/enquete/votar/{opcao_id}', [EnqueteController::class, 'votar'])->name('enquete.votar');
+Route::resource('enquete', EnqueteController::class);
 
 

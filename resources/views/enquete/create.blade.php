@@ -16,14 +16,23 @@
     <title>Enquetes</title>
 </head>
 <body>
-    
-    <div class="container">
 
-            <h1>NOVA ENQUETE</h1>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-sm-10">
+                <h1>Nova Enquete</h1>
+            </div>
+            <div class="col-sm-2">
+                <a class="btn btn-warning" href="{{ route('enquete.index') }}">Voltar</a>
+            </div>
+        </div>
 
         @if($status = Session::get('mensagem'))
-            <h2>{{ $status }}</h2>
+            <div class="alert alert-warning">
+                <h2>{{ $status }}</h2>
+            </div>
         @endif
+
 
         @if($errors->any())
         <h2>Houveram alguns erros ao processar o formulário</h2>
@@ -34,15 +43,15 @@
         </ul>
         @endif
 
-        <form action="{{ route('enquetes.store') }}" method="post">
+        <form action="{{ route('enquete.store') }}" method="post">
         @csrf
 
         <div class="mb-3 row">
-          
+
             <label for="inputTitulo" class="col-sm-2 col-form-label">Título</label>
-          
+
             <div class="col-sm-10">
-                <input type="text" id="inputTitulo" class="form-control" name="titulo" placeholder="Digite o título">
+                <input type="text" id="inputTitulo" class="form-control" name="titulo" placeholder="Digite o título" value="{{ old('titulo') }}" required>
             </div>
         </div>
 
@@ -51,7 +60,7 @@
             <label for="inputDataInicio" class="col-sm-2 col-form-label">Data para início</label>
 
             <div class="col-sm-10">
-                <input type="date" id="inputDataInicio" class="form-control" name="data_inicio" >
+                <input type="date" id="inputDataInicio" class="form-control" name="data_inicio"  value="{{ old('titulo') }}" required >
             </div>
         </div>
 
@@ -60,7 +69,7 @@
             <label for="inputDataFim" class="col-sm-2 col-form-label">Data para o término</label>
 
             <div class="col-sm-10">
-                <input type="date" id="inputDataFim" class="form-control" name="data_fim" >
+                <input type="date" id="inputDataFim" class="form-control" name="data_fim" value="{{ old('data_fim') }}" required>
             </div>
         </div>
 
@@ -70,7 +79,7 @@
 
         <!-- <tr>
             <td>Pergunta:</td>
-            <td><input type="text" name="pergunta" id="pergunta" 
+            <td><input type="text" name="pergunta" id="pergunta"
             placeholder="Cadastre uma perguntas"></td>
         </tr>
         <tr>
@@ -82,66 +91,65 @@
 
         <tr>
             <td>
-                <input class="btn btn-success" type="button" id="addButton" value="Adicionar nova opção"/></td>
-            <td>               
-            <input class="btn btn-warning" type="button" id="removeButton" value="Remover"></td>
+                <input class="btn btn-primary" type="button" id="addButton" value="Nova opção"/></td>
+            <td>
+            <input class="btn btn-warning" type="button" id="removeButton" value="Remover opção"></td>
             <td>
                 <input class="btn btn-danger" type="button"  id="resetButton" value="Remover todas opções">
             </td>
-        </tr>      
-        
+            <td>
+                <button class="btn btn-success" type="submit">Salvar</button>
+            </td>
 
-        <tr>
-            <td>&nbsp;</td>
-            <td><button type="submit">Gravar</button></td>
         </tr>
+
 
         </table>
         </form>
 
     </div>
 
-    
-    <script> 
+
+    <script>
     var idnum = 0  ;
     $(document).ready( function() {
         console.log('chegou aqui');
-        
+
         $('#addButton').click( function () {
 
 
-                var opcao =  ` 
+                var opcao =  `
                     <div class="cont mb-3 row" id="n`+(idnum+1)+`">
-            
+
                     <label for="inputOpcao`+(idnum+1)+`" class="col-sm-2 col-form-label">Opção `+(idnum+1)+`</label>
-            
+
             <div class="col-sm-10">
-                <input type="text" id="inputOpcao`+(idnum+1)+`" class="form-control" name="opcao[]" placeholder="Digite a opção `+(idnum+1)+`">
+                <input type="text" id="inputOpcao`+(idnum+1)+`" class="form-control" name="opcoes[]" placeholder="Digite a opção `+(idnum+1)+`">
             </div>
-            </div> 
+            </div>
             `;
 
 
             // $('#opcoes').append("<div class='cont'id = 'row"+ idnum +"'><tr><td><label >Type</label></td><td><select><option value='1'>Audio</option><option value='2'>Video</option></select></td></tr><tr id='name'><td><label>Name</label></td><td><input  type='text' name='name'></td></tr></div>" );
-            
+
             $('#opcoes').append(opcao);
 
             idnum++;
         });
-        
-        
+
+
         $('#resetButton').click( function () {
             $('.cont').remove()
             idnum = 0;
-            
+
         });
-        
+
         $('#removeButton').click(function() {
             var rowName = '#n'+ (idnum+1)
             $(rowName).remove()
             idnum--;
         });
-    
+
     });
 
     </script>
