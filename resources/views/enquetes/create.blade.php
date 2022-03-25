@@ -86,7 +86,7 @@
             <td>               
             <input class="btn btn-warning" type="button" id="removeButton" value="Remover"></td>
             <td>
-                <input class="btn btn-danger" type="button"  id="resetButton" value="Remover último">
+                <input class="btn btn-danger" type="button"  id="resetButton" value="Remover todas opções">
             </td>
         </tr>      
         
@@ -132,6 +132,7 @@
         
         $('#resetButton').click( function () {
             $('.cont').remove()
+            idnum = 0;
             
         });
         
