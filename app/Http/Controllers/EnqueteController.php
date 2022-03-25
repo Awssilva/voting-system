@@ -152,6 +152,7 @@ class EnqueteController extends Controller
      */
     public function destroy(Enquete $enquete)
     {
+        EnqueteOpcoes::where('enquete_id', $enquete->id)->delete();
         $enquete->delete();
         return redirect()->route('enquete.index')->with('mensagem', 'Enquete excluida com sucesso!');
     }
