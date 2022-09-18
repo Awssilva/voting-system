@@ -13,13 +13,23 @@
 
 </head>
 <body>
+
+    <div class="container">
+        <header class="d-flex justify-content-center py-3">
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/enquete" class="nav-link active" aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="{{ route('enquete.create') }}" class="nav-link">Nova Enquete</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+        </ul>
+        </header>
+    </div>
+
     <div class="container mt-5">
         <div class="row">
             <div class="col-sm-10">
                 <h1>Enquetes</h1>
-            </div>
-            <div class="col-sm-2">
-                <a class="btn btn-success" href="{{ route('enquete.create') }}">Nova Enquete</a>
             </div>
         </div>
 
